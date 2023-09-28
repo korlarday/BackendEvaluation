@@ -14,5 +14,14 @@ namespace Evaluation.Dtos
         public string ContactSurname { get; set; }
         public DateTime DateOfEstablishment { get; set; }
         public string AverageTransactionVolume { get; set; }
+
+        internal bool IsBusinessDateLessThanAYear()
+        {
+            var dateNow = DateTime.Now;
+            if((dateNow - this.DateOfEstablishment).TotalDays < 365) return true;
+            return false;
+        }
     }
+
+
 }

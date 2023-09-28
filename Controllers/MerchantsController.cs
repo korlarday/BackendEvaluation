@@ -64,6 +64,10 @@ namespace Evaluation.Controllers
                 {
                     return BadRequest(merchantDto);
                 }
+                if(merchantDto.IsBusinessDateLessThanAYear())
+                {
+                    return BadRequest("Business age is less than a year");
+                }
                 var merchantObj = _Mapper.Map<MerchantDto, Merchant>(merchantDto);
 
                 var merchant = await _MerchantRepository.AddMerchant(merchantObj);
