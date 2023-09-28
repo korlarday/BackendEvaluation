@@ -9,23 +9,20 @@ namespace Evaluation.Repositories
     public class MerchantRepository: IMerchantRepository
     {
         private readonly ApplicationDbContext _Context;
-        private readonly IMapper _Mapper;
 
-        public MerchantRepository(ApplicationDbContext dbContext, IMapper mapper)
+        public MerchantRepository(ApplicationDbContext dbContext)
         {
             _Context = dbContext;
-            _Mapper = mapper;
         }
 
 
-        public async Task<Merchant> AddMerchant(MerchantDto MerchantDto)
+        public async Task<Merchant> AddMerchant(Merchant merchantdata)
         {
             try
             {
-                Merchant Merchant = _Mapper.Map<Merchant>(MerchantDto);
-                _Context.Merchants.Add(Merchant);
+                _Context.Merchants.Add(merchantdata);
                 await _Context.SaveChangesAsync();
-                return Merchant;
+                return merchantdata;
             }
             catch (Exception)
             {

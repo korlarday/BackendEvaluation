@@ -64,7 +64,9 @@ namespace Evaluation.Controllers
                 {
                     return BadRequest(merchantDto);
                 }
-                var merchant = await _MerchantRepository.AddMerchant(merchantDto);
+                var merchantObj = _Mapper.Map<MerchantDto, Merchant>(merchantDto);
+
+                var merchant = await _MerchantRepository.AddMerchant(merchantObj);
 
                 var merchantResponse = _Mapper.Map<Merchant, MerchantDto>(merchant);
                 return Ok(merchantResponse);
