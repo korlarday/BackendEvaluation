@@ -10,20 +10,17 @@ namespace Evaluation.Repositories
     {
 
         private readonly ApplicationDbContext _Context;
-        private readonly IMapper _Mapper;
 
-        public CustomerRepository(ApplicationDbContext dbContext, IMapper mapper)
+        public CustomerRepository(ApplicationDbContext dbContext)
         {
             _Context = dbContext;
-            _Mapper = mapper;
         }
 
 
-        public async Task<Customer> AddCustomer(CustomerDto customerDto)
+        public async Task<Customer> AddCustomer(Customer customer)
         {
             try
             {
-                Customer customer = _Mapper.Map<Customer>(customerDto);
                 _Context.Customers.Add(customer);
                 await _Context.SaveChangesAsync();
                 return customer;

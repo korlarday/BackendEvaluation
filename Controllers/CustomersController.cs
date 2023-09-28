@@ -65,7 +65,9 @@ namespace Evaluation.Controllers
                 {
                     return BadRequest(customerDto);
                 }
-                var customer = await _CustomerRepository.AddCustomer(customerDto);
+                var customerObj = _Mapper.Map<CustomerDto, Customer>(customerDto);
+
+                var customer = await _CustomerRepository.AddCustomer(customerObj);
 
                 var customerResponse = _Mapper.Map<Customer, CustomerDto>(customer);
                 return Ok(customerResponse);
